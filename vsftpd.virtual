@@ -1,0 +1,4 @@
+#%PAM-1.0
+auth       required     pam_pwdfile.so pwdfile /etc/vsftpd/vsftpd-virtual-user
+account    required     pam_permit.so 
+session    required     pam_loginuid.so

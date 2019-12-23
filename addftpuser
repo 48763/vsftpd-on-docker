@@ -1,0 +1,9 @@
+FTP_USER=$1
+FTP_PASS=$2
+
+if [ ! -e /data/${FTP_USER} ]; then 
+    mkdir /data/${FTP_USER}
+    echo ${FTP_USER}:"$(openssl passwd -1 ${FTP_PASS})" >> /etc/vsftpd/vsftpd-virtual-user
+else 
+    echo "${FTP_USER} folder already exist."
+fi

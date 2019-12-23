@@ -1,0 +1,21 @@
+if [ ${PASV_ENABLE} = "YES" ]; then
+
+    sed -i "s/%%PASV_ENABLE%%/${PASV_ENABLE}/" vsftpd.conf
+
+    if [ -n "${PASV_MAX_PORT}" ]; then
+        sed -i "s/%%PASV_MAX_PORT%%/${PASV_MAX_PORT}/" vsftpd.conf
+    else 
+        sed -i "s/%%PASV_MAX_PORT%%/61000/" vsftpd.conf
+    fi
+
+    if [ -n "${PASV_MIN_PORT}" ]; then
+        sed -i "s/%%PASV_MIN_PORT%%/${PASV_MIN_PORT}/" vsftpd.conf
+    else
+        sed -i "s/%%PASV_MIN_PORT%%/60000/" vsftpd.conf
+    fi
+
+else
+    sed -i "s/%%PASV_ENABLE%%/NO/" vsftpd.conf
+fi
+
+exec "$@"
