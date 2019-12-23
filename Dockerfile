@@ -29,6 +29,6 @@ RUN set -x \
 WORKDIR /etc/vsftpd
 
 COPY ["vsftpd.virtual", "/etc/pam.d/"]
-COPY ["addftpuser", "vsftpd.conf", "run", "/etc/vsftpd/"]
+COPY ["vsftpd/", "/etc/vsftpd/"]
 
 CMD ["sh", "run", "vsftpd", "vsftpd.conf"]
