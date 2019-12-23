@@ -4,11 +4,21 @@ Vsftpd（Very Secure FTP Daemon）是運行在 *類unix（Unix-like）* 上的 F
 
 ## 簡介
 
-> 簡介尚未完成
+### 輕量極鏡像
+
+該鏡像使用 alpine 為基底建置，鏡像大小總和不到 10MB。
+
+### 用戶認證
+
+用戶認證採用 *libpam-pwdfile*，使用 `/etc/vsftpd/addftpuser` [創建用戶](#創建用戶)時，用戶列表會儲存在 `/etc/vsftpd/vsftpd-virtual-user`。
+
+### 配置簡易：
+
+啟用或變更被動模式，僅需更改 [`vsftpd.env`](#可用參數設定)，在啟用容器時，會自動帶入參數。如果要做更多的配置應用，直接掛載配置檔即可。
 
 ## 快速運行
 
-使用下面指令，就可以運行最新版的 vsftpd 應用：
+使用下面指令，運行最新版的 vsftpd 應用，預設為主動模式：
 
 ```bash
 $ docker run --name vsftpd \
@@ -19,6 +29,8 @@ $ docker run --name vsftpd \
 
 ### 創建用戶
 
+初次運行時，請使用下面指令新增**用戶**和**密碼**：
+
 ```bash
 $ docker exec vsftpd \
     /bin/sh addftpuser yuki P@ssw0rd
@@ -26,19 +38,11 @@ $ docker exec vsftpd \
 
 ## 掛載
 
+使用目錄掛載，以配置或本地保存資料。
 
-### 資料保存
+### 配置
 
-```bash
-$ docker run --name vsftpd \
-    -p 20:20 \
-    -p 21:21 \
-    -v /data:/data \
-    -d 48763/vsftpd
-```
-
-### 配置保存
-
+運行時，掛載配置檔和用戶資料：
 
 ```bash
 $ docker run --name vsftpd \
@@ -48,6 +52,19 @@ $ docker run --name vsftpd \
     -d 48763/vsftpd
 ```
 
+
+
+### 儲存資料
+
+運行時，掛載儲放用戶的目錄資料：
+
+```bash
+$ docker run --name vsftpd \
+    -p 20:20 \
+    -p 21:21 \
+    -v /data:/data \
+    -d 48763/vsftpd
+```
 
 ## 可用參數設定
 
@@ -59,12 +76,12 @@ $ docker run --name vsftpd \
 
 ## 被動模式
 
+想要啟用被動模式，只要編輯 `vsftpd.env` 在運行即可：
+
 ```bash
 $ vi vsftpd.env
 PASV_ENABLE=YES
-```
 
-```bash
 $ docker run --name vsftpd \
     -p 20:20 \
     -p 21:21 \
@@ -74,6 +91,8 @@ $ docker run --name vsftpd \
 ```
 
 ### 修改被動傳輸埠
+
+想要變更被動模式的傳輸埠，只要編輯 `vsftpd.env` 在運行即可：
 
 ```bash
 $ vi vsftpd.env
