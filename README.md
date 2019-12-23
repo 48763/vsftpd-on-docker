@@ -98,9 +98,7 @@ $ docker run --name vsftpd \
 $ vi vsftpd.env
 PASV_MAX_PORT=48763
 PASV_MIN_PORT=40000
-```
 
-```bash
 $ docker run --name vsftpd \
     -p 20:20 \
     -p 21:21 \
