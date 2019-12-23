@@ -14,7 +14,7 @@ Vsftpd（Very Secure FTP Daemon）是運行在 *類unix（Unix-like）* 上的 F
 
 ### 配置簡易：
 
-啟用或變更被動模式，僅需更改 [`vsftpd.env`](#可用參數設定)，在啟用容器時，會自動帶入參數。如果要做更多的配置應用，直接掛載配置檔即可。
+啟用或變更被動模式，僅需更改 [`vsftpd.env`](#被動模式)，在啟用容器時，會自動帶入參數。如果要做更多的配置應用，直接掛載配置檔即可。
 
 ## 快速運行
 
@@ -26,6 +26,8 @@ $ docker run --name vsftpd \
     -p 21:21 \
     -d 48763/vsftpd
 ```
+
+*如果使用時，遇到 `500 Illegal PORT command`，請使用[被動模式](#被動模式)。*
 
 ### 創建用戶
 
@@ -66,7 +68,9 @@ $ docker run --name vsftpd \
     -d 48763/vsftpd
 ```
 
-## 可用參數設定
+## 被動模式
+
+### 可用參數
 
 | 參數 | 描述 | 預設值 | 相依參數 |
 | -- | -- | -- | -- |
@@ -74,7 +78,7 @@ $ docker run --name vsftpd \
 | PASV_MIN_PORT |  | 60,000 | PASV_ENABLE |
 | PASV_MAX_PORT |  | 61,000 | PASV_ENABLE |
 
-## 被動模式
+### 啟用被動模式
 
 想要啟用被動模式，只要編輯 `vsftpd.env` 在運行即可：
 
