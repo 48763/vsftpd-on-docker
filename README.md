@@ -54,8 +54,6 @@ $ docker run --name vsftpd \
     -d 48763/vsftpd
 ```
 
-
-
 ### 儲存資料
 
 運行時，掛載儲放用戶的目錄資料：
@@ -90,7 +88,7 @@ $ docker run --name vsftpd \
     -p 20:20 \
     -p 21:21 \
     -p 60000-61000:60000-61000 \
-    -e --env-file vsftpd.env \
+    --env-file vsftpd.env \
     -d 48763/vsftpd
 ```
 
@@ -107,7 +105,7 @@ $ docker run --name vsftpd \
     -p 20:20 \
     -p 21:21 \
     -p 40000-48763:40000-48763 \
-    -e --env-file vsftpd.env \
+    --env-file vsftpd.env \
     -d 48763/vsftpd
 ```
 
