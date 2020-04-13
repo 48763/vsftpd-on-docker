@@ -31,4 +31,4 @@ WORKDIR /etc/vsftpd
 COPY ["vsftpd.virtual", "/etc/pam.d/"]
 COPY ["vsftpd/", "/etc/vsftpd/"]
 
-CMD ["sh", "run", "vsftpd", "vsftpd.conf"]
+CMD ["sh", "run", "vsftpd", "vsftpd-run.conf"]

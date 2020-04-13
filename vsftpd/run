@@ -18,4 +18,6 @@ else
     sed -i "s/%%PASV_ENABLE%%/NO/" vsftpd.conf
 fi
 
+cp vsftpd.conf vsftpd-run.conf
+
 exec "$@"
